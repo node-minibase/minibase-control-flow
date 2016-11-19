@@ -51,13 +51,33 @@
   },
   "verb": {
     "run": true,
-    "toc": true,
+    "toc": {
+      "render": true,
+      "method": "preWrite",
+      "maxdepth": 3,
+      "footer": ""
+    },
     "layout": "empty",
     "tasks": [
       "readme"
     ],
     "lint": {
       "reflinks": true
-    }
+    },
+    "related": {
+      "list": []
+    },
+    "reflinks": [
+      "base",
+      "each-promise",
+      "minibase",
+      "assert-kindof",
+      "commitizen",
+      "is-kindof",
+      "kind-of",
+      "standard-version",
+      "verb",
+      "verb-generate-readme"
+    ]
   }
 }
