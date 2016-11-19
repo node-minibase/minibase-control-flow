@@ -7,17 +7,13 @@
 
 'use strict'
 
-var extend = require('extend-shallow')
-var each = require('each-promise')
+var utils = require('./utils')
 
 module.exports = function minibaseControlFlow (opts) {
-  return function (self) {
-    self.define('serial', function serial (iterable, opts) {
-      this.options = extend({}, this.options, opts)
-      return each.serial(iterable, this.options)
-    })
-    self.define('parallel', function parallel (iterable, opts) {
-      return each.parallel(iterable, extend(this.options, opts))
-    })
-  }
+  return utils.createPlugin('minibase-control-flow', function (self) {
+    self.options = utils.extend(self.options, opts)
+
+    self.define('serial', utils.wrap(self, utils.each.serial))
+    self.define('parallel', utils.wrap(self, utils.each.parallel))
+  })
 }
