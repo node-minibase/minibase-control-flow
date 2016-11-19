@@ -43,7 +43,27 @@
     "index.js",
     "utils.js"
   ],
-  "keywords": [],
+  "keywords": [
+    "base",
+    "baseplugin",
+    "callback",
+    "cb",
+    "concurrency",
+    "control",
+    "controlflow",
+    "ctrl",
+    "each",
+    "flow",
+    "flowcontrol",
+    "mini",
+    "minibase",
+    "minibaseplugin",
+    "parallel",
+    "promise",
+    "promises",
+    "serial",
+    "series"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
