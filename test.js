@@ -1,5 +1,5 @@
 /*!
- * kind-of-extra <https://github.com/tunnckoCore/kind-of-extra>
+ * minibase-control-flow <https://github.com/node-minibase/minibase-control-flow>
  *
  * Copyright (c) Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)
  * Released under the MIT license.
