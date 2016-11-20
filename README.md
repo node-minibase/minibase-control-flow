@@ -15,6 +15,8 @@
 [![coverage status][coveralls-img]][coveralls-url] 
 [![dependency status][david-img]][david-url]
 
+You might also be interested in [each-promise](https://github.com/tunnckocore/each-promise#readme).
+
 ## Table of Contents
 - [Install](#install)
 - [Usage](#usage)
@@ -26,6 +28,7 @@
   * [Hooks](#hooks)
   * [Item](#item)
   * [Finish hook](#finish-hook)
+- [Related](#related)
 - [Contributing](#contributing)
 - [Building docs](#building-docs)
 - [Running tests](#running-tests)
@@ -246,6 +249,18 @@ app.parallel(arr).then((res) => {
 
 **[back to top](#readme)**
 
+## Related
+- [always-done](https://www.npmjs.com/package/always-done): Handle completion and errors with elegance! Support for streams, callbacks, promises, child processes, async/await and sync functions. A drop-in replacement… [more](https://github.com/hybridables/always-done#readme) | [homepage](https://github.com/hybridables/always-done#readme "Handle completion and errors with elegance! Support for streams, callbacks, promises, child processes, async/await and sync functions. A drop-in replacement for [async-done][] - pass 100% of its tests plus more")
+- [each-promise](https://www.npmjs.com/package/each-promise): Iterate over promises, promise-returning or async/await functions in series or parallel. Support settle (fail-fast), concurrency (limiting) and hooks system (start… [more](https://github.com/tunnckocore/each-promise#readme) | [homepage](https://github.com/tunnckocore/each-promise#readme "Iterate over promises, promise-returning or async/await functions in series or parallel. Support settle (fail-fast), concurrency (limiting) and hooks system (start, beforeEach, afterEach, finish)")
+- [minibase-better-define](https://www.npmjs.com/package/minibase-better-define): Plugin for [base][] and [minibase][] that overrides the core `.define` method to be more better. | [homepage](https://github.com/node-minibase/minibase-better-define#readme "Plugin for [base][] and [minibase][] that overrides the core `.define` method to be more better.")
+- [minibase-create-plugin](https://www.npmjs.com/package/minibase-create-plugin): Utility for [minibase][] and [base][] that helps you create plugins | [homepage](https://github.com/node-minibase/minibase-create-plugin#readme "Utility for [minibase][] and [base][] that helps you create plugins")
+- [minibase-is-registered](https://www.npmjs.com/package/minibase-is-registered): Plugin for [minibase][] and [base][], that adds `isRegistered` method to your application to detect if plugin is already registered and… [more](https://github.com/node-minibase/minibase-is-registered#readme) | [homepage](https://github.com/node-minibase/minibase-is-registered#readme "Plugin for [minibase][] and [base][], that adds `isRegistered` method to your application to detect if plugin is already registered and returns true or false if named plugin is already registered on the instance.")
+- [minibase-results](https://www.npmjs.com/package/minibase-results): Plugin for [minibase][] that adds useful initial properties for test results | [homepage](https://github.com/node-minibase/minibase-results#readme "Plugin for [minibase][] that adds useful initial properties for test results")
+- [minibase-tests](https://www.npmjs.com/package/minibase-tests): Tests for applications built on [minibase][] or [base][]. All Base apps passes these tests. | [homepage](https://github.com/node-minibase/minibase-tests#readme "Tests for applications built on [minibase][] or [base][]. All Base apps passes these tests.")
+- [minibase-visit](https://www.npmjs.com/package/minibase-visit): Plugin for [minibase][] and [base][], that adds `.visit` method to your application to visit a method over the items in… [more](https://github.com/node-minibase/minibase-visit#readme) | [homepage](https://github.com/node-minibase/minibase-visit#readme "Plugin for [minibase][] and [base][], that adds `.visit` method to your application to visit a method over the items in an object, or map visit over the objects in an array. Using using [collection-visit][] package.")
+- [minibase](https://www.npmjs.com/package/minibase): Minimalist alternative for Base. Build complex APIs with small units called plugins. Works well with most of the already existing… [more](https://github.com/node-minibase/minibase#readme) | [homepage](https://github.com/node-minibase/minibase#readme "Minimalist alternative for Base. Build complex APIs with small units called plugins. Works well with most of the already existing [base][] plugins.")
+- [try-catch-callback](https://www.npmjs.com/package/try-catch-callback): try/catch block with a callback, used in [try-catch-core][]. Use it when you don't care about asyncness so much and don't… [more](https://github.com/hybridables/try-catch-callback#readme) | [homepage](https://github.com/hybridables/try-catch-callback#readme "try/catch block with a callback, used in [try-catch-core][]. Use it when you don't care about asyncness so much and don't want guarantees. If you care use [try-catch-core][].")
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/node-minibase/minibase-control-flow/issues/new).  
 Please read the [contributing guidelines](CONTRIBUTING.md) for advice on opening issues, pull requests, and coding standards.
@@ -289,13 +304,16 @@ Copyright © 2016, [Charlike Mike Reagent](http://www.tunnckocore.tk). Released 
 _This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.2.0, on November 20, 2016._
 
 [assert-kindof]: https://github.com/tunnckocore/assert-kindof
+[async-done]: https://github.com/gulpjs/async-done
 [base]: https://github.com/node-base/base
+[collection-visit]: https://github.com/jonschlinkert/collection-visit
 [commitizen]: https://github.com/commitizen/cz-cli
 [each-promise]: https://github.com/tunnckocore/each-promise
 [is-kindof]: https://github.com/tunnckocore/is-kindof
 [kind-of]: https://github.com/jonschlinkert/kind-of
 [minibase]: https://github.com/node-minibase/minibase
 [standard-version]: https://github.com/conventional-changelog/standard-version
+[try-catch-core]: https://github.com/hybridables/try-catch-core
 [verb-generate-readme]: https://github.com/verbose/verb-generate-readme
 [verb]: https://github.com/verbose/verb
 

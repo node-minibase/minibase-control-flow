@@ -81,23 +81,38 @@
     "tasks": [
       "readme"
     ],
-    "lint": {
-      "reflinks": true
-    },
     "related": {
-      "list": []
+      "highlight": "each-promise",
+      "list": [
+        "minibase",
+        "minibase-tests",
+        "minibase-create-plugin",
+        "minibase-visit",
+        "minibase-results",
+        "minibase-is-registered",
+        "minibase-better-define",
+        "each-promise",
+        "always-done",
+        "try-catch-callback"
+      ]
     },
     "reflinks": [
-      "base",
-      "each-promise",
-      "minibase",
       "assert-kindof",
+      "base",
       "commitizen",
+      "each-promise",
       "is-kindof",
       "kind-of",
+      "minibase",
       "standard-version",
       "verb",
-      "verb-generate-readme"
-    ]
+      "verb-generate-readme",
+      "async-done",
+      "collection-visit",
+      "try-catch-core"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
