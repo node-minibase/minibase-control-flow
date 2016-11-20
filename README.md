@@ -19,6 +19,13 @@
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
+  * [minibaseControlFlow](#minibasecontrolflow)
+  * [.serial](#serial)
+  * [.parallel](#parallel)
+  * [Options](#options)
+  * [Hooks](#hooks)
+  * [Item](#item)
+  * [Finish hook](#finish-hook)
 - [Contributing](#contributing)
 - [Building docs](#building-docs)
 - [Running tests](#running-tests)
@@ -48,6 +55,196 @@ const minibaseControlFlow = require('minibase-control-flow')
 ```
 
 ## API
+
+### [minibaseControlFlow](index.js#L39)
+> Adds `.serial` and `.parallel` methods to your application. The `opts` object is merged with app's options and it is passed to respective [each-promise][] methods. See [options section](#options).
+
+**Params**
+
+* `opts` **{Object}**: optional, passed directly to [each-promise][]    
+* `returns` **{Function}**: plugin that can be passed to [base][]/[minibase][]'s `.use` method  
+
+**Example**
+
+```js
+var flow = require('minibase-control-flow')
+
+var MiniBase = require('minibase').MiniBase
+var app = new MiniBase()
+app.use(flow())
+
+// or as Base plugin
+
+var Base = require('base')
+var base = new Base()
+base.use(flow())
+```
+
+### [.serial](index.js#L90)
+> Iterate over `iterable` in series (serially) with optional `opts` (see [options section](#options)) and optional `mapper` function (see [item section](#item)).
+
+**Params**
+
+* `<iterable>` **{Array|Object}**: iterable object like array or object with any type of values    
+* `[mapper]` **{Function}**: function to apply to each item in `iterable`, see [item section](#item)    
+* `[opts]` **{Object}**: see [options section](#options)    
+* `returns` **{Promise}**  
+
+**Example**
+
+```js
+var delay = require('delay')
+var flow = require('minibase-control-flow')
+var app = require('minibase')
+
+app.use(flow())
+
+var arr = [
+  () => delay(500).then(() => 1),
+  () => delay(200).then(() => { throw Error('foo') }),
+  () => delay(10).then(() => 3),
+  () => delay(350).then(() => 4),
+  () => delay(150).then(() => 5)
+]
+
+app.serial(arr)
+.then((res) => {
+  console.log(res) // [1, Error: foo, 3, 4, 5]
+})
+
+// see what happens when parallel
+app.parallel(arr)
+.then((res) => {
+  console.log(res) // => [3, 5, Error: foo, 4, 1]
+})
+
+// pass `settle: false` if you want
+// to stop after first error
+app.serial(arr, { settle: false })
+.catch((err) => console.log(err)) // => Error: foo
+```
+
+### [.parallel](index.js#L169)
+> Iterate concurrently over `iterable` in parallel (support limiting with `opts.concurrency`) with optional `opts` (see [options section](#options)) and optional `mapper` function (see [item section](#item)).
+
+**Params**
+
+* `<iterable>` **{Array|Object}**: iterable object like array or object with any type of values    
+* `[mapper]` **{Function}**: function to apply to each item in `iterable`, see [item section](#item)    
+* `[opts]` **{Object}**: see [options section](#options)    
+* `returns` **{Promise}**  
+
+**Example**
+
+```js
+var flow = require('minibase-control-flow')
+var app = require('minibase')
+
+app.use(flow())
+
+var arr = [
+  function one () {
+    return delay(200).then(() => {
+      return 123
+    })
+  },
+  Promise.resolve('foobar'),
+  function two () {
+    return delay(1500).then(() => {
+      return 345
+    })
+  },
+  delay(10).then(() => 'zero'),
+  function three () {
+    return delay(400).then(() => {
+      coffffnsole.log(3) // eslint-disable-line no-undef
+      return 567
+    })
+  },
+  'abc',
+  function four () {
+    return delay(250).then(() => {
+      return 789
+    })
+  },
+  function five () {
+    return delay(100).then(() => {
+      sasasa // eslint-disable-line no-undef
+      return 444
+    })
+  },
+  function six () {
+    return delay(80).then(() => {
+      return 'last'
+    })
+  }
+]
+
+// does not stop after first error
+// pass `settle: false` if you want
+app.parallel(arr).then((res) => {
+  console.log(res)
+  // => [
+  //   'foobar',
+  //   'abc',
+  //   'zero',
+  //   'last',
+  //   ReferenceError: sasasa is not defined,
+  //   123,
+  //   789,
+  //   ReferenceError: coffffnsole is not defined
+  //   345
+  // ]
+})
+```
+
+### Options
+> You have control over everything, through options.
+
+* `Promise` **{Function}**: custom Promise constructor to be used, defaults to native
+* `mapper` **{Function}**: function to apply to each item in `iterable`, see [item section](#item)
+* `settle` **{Boolean}**: if `false` stops after first error (also known as _"fail-fast"_ or _"bail"_), default `true`
+* `flat` **{Boolean}**: result array to contain only values, default `true`
+* `concurrency` **{Number}**: works only with `.parallel` method, defaults to `iterable` length
+* `start` **{Function}**: on start hook, see [hooks section](#hooks)
+* `beforeEach` **{Function}**: called before each item in `iterable`, see [hooks section](#hooks)
+* `afterEach` **{Function}**: called after each item in `iterable`, see [hooks section](#hooks)
+* `finish` **{Function}**: called at the end of iteration, see [hooks section](#hooks)
+
+**[back to top](#readme)**
+
+### Hooks
+> You can do what you want between stages through hooks - start, before each, after each, finish.
+
+* `start` **{Function}**: called at the start of iteration, before anything
+* `beforeEach` **{Function}**: passed with `item, index, arr` arguments
+  + `item` is an object with `value`, `reason` and `index` properties, see [item section](#item)
+  + `index` is the same as `item.index`
+  + `arr` is the iterable object - array or object
+* `afterEach` **{Function}**: passed with `item, index, arr` arguments
+  + `item` is an object with `value`, `reason` and `index` properties, see [item section](#item)
+  + `index` is the same as `item.index`
+  + `arr` is the iterable object - array or object
+* `finish` **{Function}**: called at the end of iteration, see [finish hook section](#finish-hook)
+
+**[back to top](#readme)**
+
+### Item
+> That object is special object, that is passed to `beforeEach` and `afterEach` hooks, also can be found in `result` object if you pass `opts.flat: false` option. And passed to `opts.mapper` function too.
+
+* `item.value` resolved/rejected promise value, if at `beforeEach` hook it can be `function`
+* `item.reason` may not exist if `item.value`, if exist it is standard Error object
+* `item.index` is number, order of "executing", not the order that is defined in `iterable`
+
+**[back to top](#readme)**
+
+### Finish hook
+> This hooks is called when everything is finished / completed. At the very end of iteration. It is passed with `err, result` arguments where:
+
+* `err` is an Error object, if `opts.settle: false`, otherwise `null`
+* `result` is always an array with values or [item objects](#item) if `opts.flat: false`
+
+**[back to top](#readme)**
 
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/node-minibase/minibase-control-flow/issues/new).  
@@ -89,7 +286,7 @@ Copyright © 2016, [Charlike Mike Reagent](http://www.tunnckocore.tk). Released 
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.2.0, on November 19, 2016._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.2.0, on November 20, 2016._
 
 [assert-kindof]: https://github.com/tunnckocore/assert-kindof
 [base]: https://github.com/node-base/base
