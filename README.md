@@ -6,7 +6,7 @@
 
 # minibase-control-flow [![NPM version](https://img.shields.io/npm/v/minibase-control-flow.svg?style=flat)](https://www.npmjs.com/package/minibase-control-flow) [![NPM downloads](https://img.shields.io/npm/dm/minibase-control-flow.svg?style=flat)](https://npmjs.org/package/minibase-control-flow) [![npm total downloads][downloads-img]][downloads-url]
 
-> Plugin for [minibase][] and [base][] that adds control flow methods `.serial` and `.parallel` to your application, based on [each-promise][]
+> Plugin for [minibase][] and [base][] that adds control flow methods `.serial` and `.parallel` to your application, based on the power of [each-promise][] lib for dealing with async flow.
 
 [![code climate][codeclimate-img]][codeclimate-url] 
 [![standard code style][standard-img]][standard-url] 
