@@ -167,5 +167,49 @@ module.exports = function minibaseControlFlow (opts) {
      */
 
     self.define('parallel', utils.wrap(self, utils.each.parallel))
+
+    /**
+     * > Iterate over `iterable` in series or parallel (default), depending on
+     * default `opts`. Pass `opts.serial: true` if you
+     * want to iterate in series, pass `opts.serial: false` or does not
+     * pass anything for parallel.
+     *
+     * **Example**
+     *
+     * ```js
+     * var delay = require('delay')
+     * var app = require('minibase')
+     * var flow = require('minibase-control-flow')
+     *
+     * app.use(flow())
+     *
+     * var promise = app.each([
+     *   123,
+     *   function () {
+     *     return delay(500).then(() => 456)
+     *   },
+     *   Promise.resolve(678),
+     *   function () {
+     *     return 999
+     *   },
+     *   function () {
+     *     return delay(200).then(() => 'foo')
+     *   }
+     * ])
+     *
+     * promise.then(function (res) {
+     *   console.log('done', res) // => [123, 678, 999, 'foo', 456]
+     * })
+     * ```
+     *
+     * @name   .each
+     * @param  {Array|Object} `<iterable>` iterable object like array or object with any type of values
+     * @param  {Function} `[mapper]` function to apply to each item in `iterable`, see [item section](#item)
+     * @param  {Object} `[opts]` see [options section](#options)
+     * @return {Promise}
+     * @api public
+     */
+
+    self.define('each', utils.wrap(self, utils.each.each))
   })
 }

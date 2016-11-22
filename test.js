@@ -17,9 +17,10 @@ var plugin = require('./index')
 
 var suite = minitest(MiniBase)
 
-suite.addTest('should have `.parallel` and `.serial` methods', function () {
+suite.addTest('should have `.parallel`, `.serial` and `.each`  methods', function () {
   var app = new MiniBase()
   app.use(plugin())
+  assert.strictEqual(typeof app.each, 'function')
   assert.strictEqual(typeof app.serial, 'function')
   assert.strictEqual(typeof app.parallel, 'function')
 
@@ -32,9 +33,11 @@ suite.addTest('should both methods return promises', function () {
 
   var p1 = base.serial([Promise.resolve(11)], function noop () {})
   var p2 = base.parallel(['foo', Promise.resolve(22), 33])
+  var p3 = base.each([1, Promise.reject(new Error('foo')), 'qux'])
 
   assert.strictEqual(isPromise(p1), true)
   assert.strictEqual(isPromise(p2), true)
+  assert.strictEqual(isPromise(p3), true)
 
   return Promise.resolve()
 })
