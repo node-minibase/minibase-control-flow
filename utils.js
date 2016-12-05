@@ -2,7 +2,7 @@
 
 var utils = require('lazy-cache')(require)
 var fn = require
-require = utils // eslint-disable-line no-undef, no-global-assign
+require = utils // eslint-disable-line no-undef, no-native-reassign, no-global-assign
 
 /**
  * Lazily required module dependencies
@@ -11,7 +11,7 @@ require = utils // eslint-disable-line no-undef, no-global-assign
 require('each-promise', 'each')
 require('extend-shallow', 'extend')
 require('minibase-create-plugin', 'createPlugin')
-require = fn // eslint-disable-line no-undef, no-global-assign
+require = fn // eslint-disable-line no-undef, no-native-reassign, no-global-assign
 
 utils.wrap = function wrap (self, flow) {
   return function (iterable, mapper, options) {
