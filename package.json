@@ -1,6 +1,6 @@
 {
   "name": "minibase-control-flow",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Plugin for [minibase][] and [base][] that adds control flow methods `.serial` and `.parallel` to your application, based on the power of [each-promise][] lib for dealing with async flow.",
   "repository": "node-minibase/minibase-control-flow",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://i.am.charlike.online)",
