@@ -27,7 +27,7 @@
     "minibase-create-plugin": "^1.0.2"
   },
   "devDependencies": {
-    "commitizen": "~2.7.0",
+    "commitizen": "~2.9.4",
     "coveralls": "^2.11.15",
     "cz-conventional-changelog": "1.1.5",
     "is-promise": "^2.1.0",
