@@ -24,7 +24,7 @@
     "each-promise": "^1.0.2",
     "extend-shallow": "^2.0.1",
     "lazy-cache": "^2.0.2",
-    "minibase-create-plugin": "^1.0.2"
+    "minibase-create-plugin": "^2.0.1"
   },
   "devDependencies": {
     "commitizen": "~2.7.0",
